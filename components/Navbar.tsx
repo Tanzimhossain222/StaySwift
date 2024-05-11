@@ -1,11 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
+import { auth } from "@/auth";
+import Logout from "./auth/Logout";
 
 interface NavbarProps {
   sideMenu: boolean;
 }
 
-const Navbar = ({ sideMenu = true }: NavbarProps) => {
+const Navbar = async ({ sideMenu = true }: NavbarProps) => {
+  const session = await auth();
+  console.log(session);
   return (
     <nav>
       <Link href="/">
@@ -17,7 +21,6 @@ const Navbar = ({ sideMenu = true }: NavbarProps) => {
         />
       </Link>
       <ul>
-
         <li>
           <Link href="#">About Us</Link>
         </li>
@@ -37,9 +40,17 @@ const Navbar = ({ sideMenu = true }: NavbarProps) => {
             </li>
 
             <li>
-              <Link href="/login" className="login">
-                Login
-              </Link>
+              {session && session?.user ? (
+                <div>
+                  <span className="mx-1"> {session?.user?.name} </span>
+                  <span> | </span>
+                  <Logout />
+                </div>
+              ) : (
+                <Link href="/login" className="login">
+                  Login
+                </Link>
+              )}
             </li>
           </>
         )}
