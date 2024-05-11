@@ -1,4 +1,4 @@
-import { getAllHotels } from "@/backend/queries";
+import { getAllHotels } from "@/backend/queries/hotels";
 import HotelCard from "./HotelCard";
 
 const HotelList =async () => {

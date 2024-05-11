@@ -12,7 +12,7 @@ export default function Home() {
                         We have 459 rooms spread throuout Indonesia with room
                         standards equivalent to 5 star hotels.
                     </p>
-                    <Search />
+                    <Search fromList={false}/>
                 </div>
             </div>
         </section>
