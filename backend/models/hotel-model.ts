@@ -5,6 +5,7 @@ interface Amenity {
 }
 
 export interface IHotel {
+  id?: string;
   name: string;
   address1: string;
   airportCode: string;
