@@ -3,8 +3,14 @@ import HotelSummaryInfo from "./HotelSummaryInfo";
 import { IHotelInfo } from "@/backend/queries/hotels/getAllHotels";
 
 
+type IHotelCardProps = {
+  hotelInfo: IHotelInfo;
+  checkin: string;
+  checkout: string;
+}
 
-const HotelCard : React.FC<{hotelInfo: IHotelInfo}> = ({hotelInfo}) => {
+
+const HotelCard : React.FC< IHotelCardProps > = ({hotelInfo, checkin, checkout}) => {
   
   return (
     <div className="flex gap-6 border border-gray/20 p-4 rounded-md">
@@ -15,7 +21,7 @@ const HotelCard : React.FC<{hotelInfo: IHotelInfo}> = ({hotelInfo}) => {
         width={240}
         height={162}
       />
-      <HotelSummaryInfo fromListPage={true} info ={ hotelInfo } />
+      <HotelSummaryInfo fromListPage={true} info ={ hotelInfo } checkin={checkin} checkout={checkout}  />
     </div>
   );
 };

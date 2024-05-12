@@ -5,9 +5,10 @@ interface GalleryProps {
   gallery: string[];
 }
 
-const Gallery : React.FC<GalleryProps> = ({gallery}) => {
-
+const Gallery : React.FC<GalleryProps> = ({ gallery }) => {
+  
   const newGallery = [...gallery];
+
   newGallery.shift();
 
   return (
