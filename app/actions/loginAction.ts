@@ -10,21 +10,20 @@ export async function login(formData : FormData){
           password: formData.get("password") as string,
           redirect: false
         })
-
-        if (res.error === "CredentialsSignin") {
-            // Handle incorrect email or password
-            return { error: "Invalid email or password" };
+      
+        if (res){  
+          return {
+            user: res
           }
-
-
-        if (res.error) {
-            return { error: res.error as Error };
         } else {
-            return { data: res };
+          return {
+            error: "Invalid credentials"
+          }
         }
 
-        
     } catch (err) {
-      throw err;
+      return {
+        error: (err as Error).message
+      }
     }
 }

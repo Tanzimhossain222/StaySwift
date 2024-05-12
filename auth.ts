@@ -15,7 +15,7 @@ type AuthorizeResponse = {
   } | null;
 
 export const { auth, signIn, signOut, handlers:{ GET, POST }} = NextAuth({
-adapter: MongoDBAdapter(clientPromise),
+adapter: MongoDBAdapter(clientPromise, {databaseName: process.env.ENVIRONMENT }),
 session: {
     strategy: "jwt",
     maxAge: 24 * 60 * 60,
@@ -36,7 +36,7 @@ session: {
             },
 
             async authorize(credentials): Promise<AuthorizeResponse> {
-                if (credentials == null) {
+                if (!credentials) {
                     return null;
                 }
 
@@ -45,13 +45,19 @@ session: {
                         email: credentials.email as string,
                         password: credentials.password as string
                     });
+                   
+                    const resUser : AuthorizeResponse = {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        image: user.image ? user.image : null
+                    }
 
-                    
-
-                    return user as AuthorizeResponse; 
+                    return resUser;
+                    // return user ? user as AuthorizeResponse : null;
 
                 } catch (err) {
-                    return null; 
+                throw (err as Error).message; 
                 }
             }
         })

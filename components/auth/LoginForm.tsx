@@ -15,17 +15,16 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const formData: FormData = new FormData(e.currentTarget);
 
     try {
-      const response = await login(formData);
-        console.log(response);
-        
+        const response = await login(formData);
         if (!!response.error) {
-          typeof response.error === "string" ? setError(response.error) : setError("An error occurred. Please try again.");
-      } else {
-        router.push("/bookings");
-      }
-
+          throw new Error(response.error);
+        } else {
+          router.push("/bookings");
+        }
+     
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      let message = (err as Error).message.split(".")[0];
+        setError(message);
     }
 }
 

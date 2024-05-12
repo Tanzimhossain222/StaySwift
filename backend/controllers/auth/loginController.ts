@@ -23,8 +23,8 @@ export const loginController = async (credentials :ICredentials)=>{
         } else {
             throw new Error("No user found");
         }
-    } catch (err) {  
-        throw  new Error(err as string);
+    } catch (err: any) {  
+        throw new Error(err.message);
     }
     
 }
