@@ -1,14 +1,19 @@
-const Search = ({fromList}) => {
+
+type SearchProps = {
+  fromList?: boolean;
+};
+
+const Search = ({fromList}:SearchProps) => {
   return (
     <>
       <div className="lg:max-h-[250px] mt-6">
-        <div id="searchParams" className={fromList && "!shadow-none"}>
+        <div id="searchParams" className={fromList ? "!shadow-none" : undefined}>
           <div>
             <span>Destination</span>
             <h4 className="mt-2">
               <select name="destination" id="destination">
                 <option value="Bali">Bali</option>
-                <option value="Bali">Cox's Bazar</option>
+                <option value="Bali">Cox&apos;s Bazar</option>
                 <option value="Bali">Sylhet</option>
                 <option value="Bali">Saint Martin</option>
                 <option value="Bali">Bali</option>

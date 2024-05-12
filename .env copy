@@ -1,0 +1,7 @@
+MONGO_URI=your_mongo_uri
+
+GOOGLE_CLIENT_ID= https://console.cloud.google.com/apis/credentials
+GOOGLE_CLIENT_SECRET=https://console.cloud.google.com/apis/credentials
+AUTH_SECRET= https://generate-secret.vercel.app/64
+
+NEXT_PUBLIC_BASE_URL= your base url
