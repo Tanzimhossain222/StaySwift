@@ -1,4 +1,10 @@
-const HotelSummaryInfo = ({fromListPage}) => {
+
+interface HotelSummaryInfoProps {
+  fromListPage?: boolean;
+}
+
+
+const HotelSummaryInfo = ({fromListPage}:HotelSummaryInfoProps) => {
   return (
     <>
       <div className={fromListPage ? "flex-1" : "flex-1 container"}>

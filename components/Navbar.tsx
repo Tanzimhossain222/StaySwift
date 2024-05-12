@@ -9,7 +9,6 @@ interface NavbarProps {
 
 const Navbar = async ({ sideMenu = true }: NavbarProps) => {
   const session = await auth();
-  console.log(session);
   return (
     <nav>
       <Link href="/">
