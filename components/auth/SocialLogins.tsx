@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
 type SocialLoginsProps = {
   mode: "login" | "register";
@@ -10,7 +11,7 @@ type SocialLoginsProps = {
 
 type socialMode = 'gitHub' | 'google';
 
-const SocialLogins = ({ mode }: SocialLoginsProps) => {
+const SocialLogins : React.FC <SocialLoginsProps> =({ mode }) => {
 
   const handleAuth = (social : socialMode) => {
 

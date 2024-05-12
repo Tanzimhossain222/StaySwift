@@ -9,6 +9,10 @@ const nextConfig = { images: {
       {
         protocol: 'https',
         hostname: "avatars.githubusercontent.com",
+      },
+      {
+        protocol: 'https',
+        hostname: "a0.muscache.com",
       }
     ],
   },};
