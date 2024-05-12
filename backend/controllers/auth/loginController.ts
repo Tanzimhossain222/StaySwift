@@ -14,7 +14,7 @@ export const loginController = async (credentials :ICredentials)=>{
         
         if (user) {
             const isMatch =  await hashMatched(credentials.password, user.password);
-            
+             
             if (isMatch) {
                 return modifyObjData(user._doc);
             } else {
