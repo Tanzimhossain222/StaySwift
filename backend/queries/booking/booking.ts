@@ -16,6 +16,7 @@ export const bookingHotel = async (
   };
 
   try {
+    await dbConnect();
 
     const res = await bookingModel.create(payload);
     return res;

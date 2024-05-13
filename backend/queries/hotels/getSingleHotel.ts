@@ -6,8 +6,8 @@ import { IHotelInfo } from "./getAllHotels";
 
 type IParametrs = {
     id: string;
-    checkin: string;
-    checkout: string;
+    checkin?: string;
+    checkout?: string;
 }
 
 export interface IInfo extends IHotelInfo {

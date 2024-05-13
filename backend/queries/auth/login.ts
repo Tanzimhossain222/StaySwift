@@ -20,6 +20,11 @@ export type IUser = {
 }
 
 export const getUser = async (email: string) : Promise<IUser> =>{
+
+  if (!email) {
+    throw new Error("Email is required");
+  }
+
   try {
     let user = await findUserByEmail(email);
 
