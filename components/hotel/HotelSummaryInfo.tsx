@@ -55,7 +55,8 @@ const HotelSummaryInfo: React.FC<HotelSummaryInfoProps> = ({
             Details
           </Link>
         ) : (
-          <button className={info?.isBooked ? "btn-disabled" : "btn-primary"}>Book</button>
+          <Link href={ info?.isBooked? "#" :`/hotels/${info?.id}/payment${params}`}
+          className={info?.isBooked ? "btn-disabled" : "btn-primary"}>Book</Link>
         )}
       </div>
     </>

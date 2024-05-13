@@ -14,7 +14,7 @@ type AuthorizeResponse = {
     image?: string | null; 
   } | null;
 
-export const { auth, signIn, signOut, handlers:{ GET, POST }} = NextAuth({
+export const { auth , signIn, signOut, handlers:{ GET, POST }} = NextAuth({
 adapter: MongoDBAdapter(clientPromise, {databaseName: process.env.ENVIRONMENT }),
 session: {
     strategy: "jwt",

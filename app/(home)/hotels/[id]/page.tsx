@@ -3,7 +3,7 @@ import Gallery from "@/components/hotel/details/Gallery";
 import Overview from "@/components/hotel/details/Overview";
 import { getHotelById } from "@/backend/queries/hotels";
 
-interface IProps {
+export interface IParams {
   params: {
     id: string;
   };
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 
-const HotelDetailsPage = async ({ params, searchParams } : IProps) => {
+const HotelDetailsPage = async ({ params, searchParams } : IParams) => {
   const { id } = params;
   const {checkin, checkout} = searchParams;
 
@@ -26,7 +26,7 @@ const HotelDetailsPage = async ({ params, searchParams } : IProps) => {
   
   return (
     <>
-      <Summary hotelInfo={hotelInfo} />
+      <Summary hotelInfo={hotelInfo} checkin={checkin} checkout={checkout} />
       <Gallery gallery={hotelInfo?.gallery} />
       <Overview overview={hotelInfo?.overview} />
     </>

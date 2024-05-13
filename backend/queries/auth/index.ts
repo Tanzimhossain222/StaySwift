@@ -1,4 +1,4 @@
-import { findUserByEmail } from "./login";
+import { findUserByEmail, getUser } from "./login";
 import { registerUser } from "./register";
 
-export { findUserByEmail,registerUser  };
+export { findUserByEmail,registerUser,getUser  };

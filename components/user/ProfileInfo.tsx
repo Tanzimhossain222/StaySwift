@@ -5,7 +5,6 @@ import Image from "next/image";
 
 const ProfileInfo = async() => {
   const session = await auth();
-  console.log(session);
   
   return (
     <div className="flex flex-col items-center py-8 text-center">
