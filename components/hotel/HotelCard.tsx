@@ -11,7 +11,6 @@ type IHotelCardProps = {
 
 
 const HotelCard : React.FC< IHotelCardProps > = ({hotelInfo, checkin, checkout}) => {
-  
   return (
     <div className="flex gap-6 border border-gray/20 p-4 rounded-md">
       <Image
