@@ -1,10 +1,11 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface IBooking extends Document {
+export interface IBooking extends Document {
     hotelId: mongoose.Types.ObjectId;
     userId: mongoose.Types.ObjectId;
     checkin: string;
     checkout: string;
+    _id?: mongoose.Types.ObjectId;
 }
 
 const bookingSchema = new Schema<IBooking>({

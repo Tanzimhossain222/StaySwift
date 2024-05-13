@@ -1,3 +1,4 @@
+import { findBooking } from "./findBooking";
 import { getAllHotels } from "./getAllHotels";
 import { getRatingsForAHotel } from "./getRatingReviews";
 import { getReviewsForAHotel } from "./getRatingReviews";
@@ -7,5 +8,6 @@ export {
     getAllHotels,
     getRatingsForAHotel,
     getReviewsForAHotel,
-    getHotelById
+    getHotelById,
+    findBooking
 }

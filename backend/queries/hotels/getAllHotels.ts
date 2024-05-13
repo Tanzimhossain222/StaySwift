@@ -1,6 +1,7 @@
 import { modifyArrayData } from "@/app/utils/data-utils";
 import { dbConnect } from "@/backend/db/connectDb";
 import { hotelModel } from "@/backend/models/hotel-model";
+import { findBooking } from "./findBooking";
 
 export interface IHotelInfo {
     id: string;
@@ -9,18 +10,64 @@ export interface IHotelInfo {
     highRate: number ;
     lowRate: number ;
     propertyCategory: number;
-    thumbNailUrl?: string
+    thumbNailUrl?: string,
+    isBooked?: boolean,
+    _id: string,
+    [key: string]: any;
+}
+
+type paraMeter = {
+    destination: string;
+    checkin: string;
+    checkout: string;
+    category?: string;
 }
   
-export async function getAllHotels(): Promise<IHotelInfo[]> {
-    await dbConnect();
+export async function getAllHotels({ destination, checkin, checkout, category }: paraMeter): Promise<IHotelInfo[]> {
     try { 
-        const hotels: IHotelInfo[] = await hotelModel.find()
+        await dbConnect();
+
+        const regex = new RegExp(destination, "i");
+
+        const hotelsByDestination: IHotelInfo[] = await hotelModel
+        .find({city: { $regex: regex }})
         .select(["thumbNailUrl", "name", "highRate", "lowRate", "city", "propertyCategory"])
         .lean();
-        
-        return modifyArrayData(hotels); 
+
+        let allHotels = hotelsByDestination;
+
+        if(category){
+            const categoriesToMatch = category.split("|");
+
+            allHotels = allHotels.filter(hotel=>{
+                return categoriesToMatch.includes(hotel.propertyCategory.toString());
+            })
+        }
+
+
+
+        if(checkin && checkout) {
+            allHotels = await Promise.all(
+                allHotels.map(async (hotel)=>{
+                    const found = await findBooking({hotelId: hotel._id , checkin, checkout});
+    
+                    if(found) {
+                        hotel["isBooked"] = true;
+                    } else {
+                        hotel["isBooked"] = false;
+                    }
+    
+                    return hotel;
+                })
+            )
+        }
+
+
+     
+        return modifyArrayData(allHotels); 
     } catch (err) {
         throw err; 
     }
 }
+
+
