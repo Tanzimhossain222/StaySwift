@@ -1,5 +1,5 @@
 import Search from "@/components/search/Search";
-import Filter from "@/components/search/Filter";
+import Filter from "@/components/search/filter/Filter";
 import HotelList from "@/components/hotel/HotelList";
 
 interface HotelListPageProps {
@@ -7,11 +7,22 @@ interface HotelListPageProps {
     destination: string;
     checkin: string;
     checkout: string;
+    category?: string;
   };
 }
 
+const refinedCategory = (category: string) => {
+  const decodeCategory = decodeURI(category);
+
+  if (decodeCategory === "undefined") {
+    return "";
+  }
+
+  return decodeCategory;
+};
+
 const HotelListPage = ({
-  searchParams: { destination, checkin, checkout },
+  searchParams: { destination, checkin, checkout, category },
 }: HotelListPageProps) => {
   return (
     <>
@@ -28,10 +39,11 @@ const HotelListPage = ({
       <section className="py-12">
         <div className="container grid grid-cols-12">
           <Filter />
-          <HotelList 
-           checkin={checkin}
-           checkout={checkout}
-           destination={destination}
+          <HotelList
+            checkin={checkin}
+            checkout={checkout}
+            destination={destination}
+            category={refinedCategory(category ?? "")}
           />
         </div>
       </section>

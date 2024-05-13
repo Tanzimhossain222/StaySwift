@@ -20,9 +20,10 @@ type paraMeter = {
     destination: string;
     checkin: string;
     checkout: string;
+    category?: string;
 }
   
-export async function getAllHotels({ destination, checkin, checkout }: paraMeter): Promise<IHotelInfo[]> {
+export async function getAllHotels({ destination, checkin, checkout, category }: paraMeter): Promise<IHotelInfo[]> {
     try { 
         await dbConnect();
 
@@ -34,6 +35,16 @@ export async function getAllHotels({ destination, checkin, checkout }: paraMeter
         .lean();
 
         let allHotels = hotelsByDestination;
+
+        if(category){
+            const categoriesToMatch = category.split("|");
+
+            allHotels = allHotels.filter(hotel=>{
+                return categoriesToMatch.includes(hotel.propertyCategory.toString());
+            })
+        }
+
+
 
         if(checkin && checkout) {
             allHotels = await Promise.all(
@@ -50,6 +61,8 @@ export async function getAllHotels({ destination, checkin, checkout }: paraMeter
                 })
             )
         }
+
+
      
         return modifyArrayData(allHotels); 
     } catch (err) {
